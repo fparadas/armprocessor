@@ -1,0 +1,26 @@
+module signalExtensor( iOpCode, oImmExt);
+begin module
+input wire [31:0] iOpCode;
+output wire [63:0] oImmExt;
+
+
+
+always @(*)
+begin
+	case(iOpCode)
+		OPB: 
+			oImmExt <= {{37'b{iOpCode[25]}}, iOpCode[24:0],{2'b00}};
+		OPLDUR:
+			oImmExt <= {{56'b{iOpCode[20]}}, iOpCode[19:12]};
+		OPSTUR:
+			oImmExt <= {{56'b{iOpCode[20]}}, iOpCode[19:12]};
+		OPCBZ:
+			oImmExt <= {{44'b{iOpCode[23]}}, iOpCode[22:5],{2'b00}};
+		default:
+			oImmExt <= 64'h0
+		
+	end case
+end
+
+
+end 

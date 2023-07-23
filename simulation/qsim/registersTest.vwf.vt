@@ -1,0 +1,537 @@
+// Copyright (C) 2018  Intel Corporation. All rights reserved.
+// Your use of Intel Corporation's design tools, logic functions 
+// and other software and tools, and its AMPP partner logic 
+// functions, and any output files from any of the foregoing 
+// (including device programming or simulation files), and any 
+// associated documentation or information are expressly subject 
+// to the terms and conditions of the Intel Program License 
+// Subscription Agreement, the Intel Quartus Prime License Agreement,
+// the Intel FPGA IP License Agreement, or other applicable license
+// agreement, including, without limitation, that your use is for
+// the sole purpose of programming logic devices manufactured by
+// Intel and sold by Intel or its authorized distributors.  Please
+// refer to the applicable agreement for further details.
+
+// *****************************************************************************
+// This file contains a Verilog test bench with test vectors .The test vectors  
+// are exported from a vector file in the Quartus Waveform Editor and apply to  
+// the top level entity of the current Quartus project .The user can use this   
+// testbench to simulate his design using a third-party simulation tool .       
+// *****************************************************************************
+// Generated on "06/23/2019 18:06:22"
+                                                                                
+// Verilog Test Bench (with test vectors) for design :                          registers
+// 
+// Simulation tool : 3rd Party
+// 
+
+`timescale 1 ps/ 1 ps
+module registers_vlg_vec_tst();
+// constants                                           
+// general purpose registers
+reg iCLK;
+reg [4:0] iDispReg;
+reg iRST;
+reg [4:0] iReadRegister1;
+reg [4:0] iReadRegister2;
+reg iRegWrite;
+reg [63:0] iWriteData;
+reg [4:0] iWriteRegister;
+// wires                                               
+wire [63:0] oDataDispReg;
+wire [63:0] oReadData1;
+wire [63:0] oReadData2;
+
+// assign statements (if any)                          
+registers i1 (
+// port map - connection between master ports and signals/registers   
+	.iCLK(iCLK),
+	.iDispReg(iDispReg),
+	.iRST(iRST),
+	.iReadRegister1(iReadRegister1),
+	.iReadRegister2(iReadRegister2),
+	.iRegWrite(iRegWrite),
+	.iWriteData(iWriteData),
+	.iWriteRegister(iWriteRegister),
+	.oDataDispReg(oDataDispReg),
+	.oReadData1(oReadData1),
+	.oReadData2(oReadData2)
+);
+initial 
+begin 
+#1000000 $finish;
+end 
+
+// iCLK
+always
+begin
+	iCLK = 1'b0;
+	iCLK = #50000 1'b1;
+	#50000;
+end 
+// iDispReg[ 4 ]
+initial
+begin
+	iDispReg[4] = 1'b0;
+end 
+// iDispReg[ 3 ]
+initial
+begin
+	iDispReg[3] = 1'b0;
+end 
+// iDispReg[ 2 ]
+initial
+begin
+	iDispReg[2] = 1'b0;
+end 
+// iDispReg[ 1 ]
+initial
+begin
+	iDispReg[1] = 1'b0;
+end 
+// iDispReg[ 0 ]
+initial
+begin
+	iDispReg[0] = 1'b0;
+end 
+
+// iRST
+initial
+begin
+	iRST = 1'b0;
+end 
+// iReadRegister1[ 4 ]
+always
+begin
+	iReadRegister1[4] = 1'b0;
+	iReadRegister1[4] = #500000 1'b1;
+	#500000;
+end 
+// iReadRegister1[ 3 ]
+always
+begin
+	iReadRegister1[3] = 1'b0;
+	iReadRegister1[3] = #250000 1'b1;
+	#250000;
+end 
+// iReadRegister1[ 2 ]
+always
+begin
+	iReadRegister1[2] = 1'b0;
+	iReadRegister1[2] = #125000 1'b1;
+	#125000;
+end 
+// iReadRegister1[ 1 ]
+always
+begin
+	iReadRegister1[1] = 1'b0;
+	iReadRegister1[1] = #62500 1'b1;
+	#62500;
+end 
+// iReadRegister1[ 0 ]
+always
+begin
+	iReadRegister1[0] = 1'b0;
+	iReadRegister1[0] = #31250 1'b1;
+	#31250;
+end 
+// iReadRegister2[ 4 ]
+initial
+begin
+	iReadRegister2[4] = 1'b0;
+end 
+// iReadRegister2[ 3 ]
+initial
+begin
+	iReadRegister2[3] = 1'b0;
+end 
+// iReadRegister2[ 2 ]
+initial
+begin
+	iReadRegister2[2] = 1'b0;
+end 
+// iReadRegister2[ 1 ]
+initial
+begin
+	iReadRegister2[1] = 1'b0;
+end 
+// iReadRegister2[ 0 ]
+initial
+begin
+	iReadRegister2[0] = 1'b1;
+end 
+
+// iRegWrite
+always
+begin
+	iRegWrite = 1'b0;
+	iRegWrite = #25000 1'b1;
+	#25000;
+end 
+// iWriteRegister[ 4 ]
+always
+begin
+	iWriteRegister[4] = 1'b0;
+	iWriteRegister[4] = #500000 1'b1;
+	#500000;
+end 
+// iWriteRegister[ 3 ]
+always
+begin
+	iWriteRegister[3] = 1'b0;
+	iWriteRegister[3] = #250000 1'b1;
+	#250000;
+end 
+// iWriteRegister[ 2 ]
+always
+begin
+	iWriteRegister[2] = 1'b0;
+	iWriteRegister[2] = #125000 1'b1;
+	#125000;
+end 
+// iWriteRegister[ 1 ]
+always
+begin
+	iWriteRegister[1] = 1'b0;
+	iWriteRegister[1] = #62500 1'b1;
+	#62500;
+end 
+// iWriteRegister[ 0 ]
+always
+begin
+	iWriteRegister[0] = 1'b0;
+	iWriteRegister[0] = #31250 1'b1;
+	#31250;
+end 
+// iWriteData[ 63 ]
+initial
+begin
+	iWriteData[63] = 1'b0;
+end 
+// iWriteData[ 62 ]
+initial
+begin
+	iWriteData[62] = 1'b0;
+end 
+// iWriteData[ 61 ]
+initial
+begin
+	iWriteData[61] = 1'b0;
+end 
+// iWriteData[ 60 ]
+initial
+begin
+	iWriteData[60] = 1'b0;
+end 
+// iWriteData[ 59 ]
+initial
+begin
+	iWriteData[59] = 1'b0;
+end 
+// iWriteData[ 58 ]
+initial
+begin
+	iWriteData[58] = 1'b0;
+end 
+// iWriteData[ 57 ]
+initial
+begin
+	iWriteData[57] = 1'b0;
+end 
+// iWriteData[ 56 ]
+initial
+begin
+	iWriteData[56] = 1'b0;
+end 
+// iWriteData[ 55 ]
+initial
+begin
+	iWriteData[55] = 1'b0;
+end 
+// iWriteData[ 54 ]
+initial
+begin
+	iWriteData[54] = 1'b0;
+end 
+// iWriteData[ 53 ]
+initial
+begin
+	iWriteData[53] = 1'b0;
+end 
+// iWriteData[ 52 ]
+initial
+begin
+	iWriteData[52] = 1'b0;
+end 
+// iWriteData[ 51 ]
+initial
+begin
+	iWriteData[51] = 1'b0;
+end 
+// iWriteData[ 50 ]
+initial
+begin
+	iWriteData[50] = 1'b0;
+end 
+// iWriteData[ 49 ]
+initial
+begin
+	iWriteData[49] = 1'b0;
+end 
+// iWriteData[ 48 ]
+initial
+begin
+	iWriteData[48] = 1'b0;
+end 
+// iWriteData[ 47 ]
+initial
+begin
+	iWriteData[47] = 1'b0;
+end 
+// iWriteData[ 46 ]
+initial
+begin
+	iWriteData[46] = 1'b0;
+end 
+// iWriteData[ 45 ]
+initial
+begin
+	iWriteData[45] = 1'b0;
+end 
+// iWriteData[ 44 ]
+initial
+begin
+	iWriteData[44] = 1'b0;
+end 
+// iWriteData[ 43 ]
+initial
+begin
+	iWriteData[43] = 1'b0;
+end 
+// iWriteData[ 42 ]
+initial
+begin
+	iWriteData[42] = 1'b0;
+end 
+// iWriteData[ 41 ]
+initial
+begin
+	iWriteData[41] = 1'b0;
+end 
+// iWriteData[ 40 ]
+initial
+begin
+	iWriteData[40] = 1'b0;
+end 
+// iWriteData[ 39 ]
+initial
+begin
+	iWriteData[39] = 1'b0;
+end 
+// iWriteData[ 38 ]
+initial
+begin
+	iWriteData[38] = 1'b0;
+end 
+// iWriteData[ 37 ]
+initial
+begin
+	iWriteData[37] = 1'b0;
+end 
+// iWriteData[ 36 ]
+initial
+begin
+	iWriteData[36] = 1'b0;
+end 
+// iWriteData[ 35 ]
+initial
+begin
+	iWriteData[35] = 1'b0;
+end 
+// iWriteData[ 34 ]
+initial
+begin
+	iWriteData[34] = 1'b0;
+end 
+// iWriteData[ 33 ]
+initial
+begin
+	iWriteData[33] = 1'b0;
+end 
+// iWriteData[ 32 ]
+initial
+begin
+	iWriteData[32] = 1'b0;
+end 
+// iWriteData[ 31 ]
+initial
+begin
+	iWriteData[31] = 1'b0;
+end 
+// iWriteData[ 30 ]
+initial
+begin
+	iWriteData[30] = 1'b0;
+end 
+// iWriteData[ 29 ]
+initial
+begin
+	iWriteData[29] = 1'b0;
+end 
+// iWriteData[ 28 ]
+initial
+begin
+	iWriteData[28] = 1'b0;
+end 
+// iWriteData[ 27 ]
+initial
+begin
+	iWriteData[27] = 1'b0;
+end 
+// iWriteData[ 26 ]
+initial
+begin
+	iWriteData[26] = 1'b0;
+end 
+// iWriteData[ 25 ]
+initial
+begin
+	iWriteData[25] = 1'b0;
+end 
+// iWriteData[ 24 ]
+initial
+begin
+	iWriteData[24] = 1'b0;
+end 
+// iWriteData[ 23 ]
+initial
+begin
+	iWriteData[23] = 1'b0;
+end 
+// iWriteData[ 22 ]
+initial
+begin
+	iWriteData[22] = 1'b0;
+end 
+// iWriteData[ 21 ]
+initial
+begin
+	iWriteData[21] = 1'b0;
+end 
+// iWriteData[ 20 ]
+initial
+begin
+	iWriteData[20] = 1'b0;
+end 
+// iWriteData[ 19 ]
+initial
+begin
+	iWriteData[19] = 1'b0;
+end 
+// iWriteData[ 18 ]
+initial
+begin
+	iWriteData[18] = 1'b0;
+end 
+// iWriteData[ 17 ]
+initial
+begin
+	iWriteData[17] = 1'b0;
+end 
+// iWriteData[ 16 ]
+initial
+begin
+	iWriteData[16] = 1'b0;
+end 
+// iWriteData[ 15 ]
+initial
+begin
+	iWriteData[15] = 1'b0;
+end 
+// iWriteData[ 14 ]
+initial
+begin
+	iWriteData[14] = 1'b0;
+end 
+// iWriteData[ 13 ]
+initial
+begin
+	iWriteData[13] = 1'b0;
+end 
+// iWriteData[ 12 ]
+initial
+begin
+	iWriteData[12] = 1'b0;
+end 
+// iWriteData[ 11 ]
+initial
+begin
+	iWriteData[11] = 1'b0;
+end 
+// iWriteData[ 10 ]
+initial
+begin
+	iWriteData[10] = 1'b0;
+end 
+// iWriteData[ 9 ]
+initial
+begin
+	iWriteData[9] = 1'b0;
+end 
+// iWriteData[ 8 ]
+initial
+begin
+	iWriteData[8] = 1'b0;
+end 
+// iWriteData[ 7 ]
+initial
+begin
+	iWriteData[7] = 1'b0;
+end 
+// iWriteData[ 6 ]
+initial
+begin
+	iWriteData[6] = 1'b0;
+end 
+// iWriteData[ 5 ]
+initial
+begin
+	iWriteData[5] = 1'b0;
+end 
+// iWriteData[ 4 ]
+always
+begin
+	iWriteData[4] = 1'b0;
+	iWriteData[4] = #500000 1'b1;
+	#500000;
+end 
+// iWriteData[ 3 ]
+always
+begin
+	iWriteData[3] = 1'b0;
+	iWriteData[3] = #250000 1'b1;
+	#250000;
+end 
+// iWriteData[ 2 ]
+always
+begin
+	iWriteData[2] = 1'b0;
+	iWriteData[2] = #125000 1'b1;
+	#125000;
+end 
+// iWriteData[ 1 ]
+always
+begin
+	iWriteData[1] = 1'b0;
+	iWriteData[1] = #62500 1'b1;
+	#62500;
+end 
+// iWriteData[ 0 ]
+always
+begin
+	iWriteData[0] = 1'b0;
+	iWriteData[0] = #31250 1'b1;
+	#31250;
+end 
+endmodule
+

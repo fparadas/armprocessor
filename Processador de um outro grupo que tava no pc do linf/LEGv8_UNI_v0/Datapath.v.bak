@@ -1,0 +1,253 @@
+/*
+ * Caminho de dados processador uniciclo
+ * input: 
+ *	iCLK - Clock
+ *	iRST - Reset
+ * output:
+ *	none
+ *
+ */
+//os wXXXX da entrada sao na verdade oXXXX
+module Datapath (
+	iCLK,
+	iCLKMem,
+	iCLK50,
+	iRST,
+	wPC,
+	wCRegDst,
+	wCOrigALU, 
+	wCMem2Reg, 
+	wCRegWrite, 
+	wCMemRead, 
+	wCMemWrite, 
+	wCOrigPC,
+	wOpcode,
+	wFunct,
+	wRegDispSelect,
+	wiRegA0,
+	wCInputA0En,
+	wRegDisp,
+	wCALUOp,
+	woInstr,
+	wDebug
+);
+
+input wire	iCLK, iCLKMem, iCLK50, iRST;
+output wire [31:0] wPC,wRegDisp,woInstr;
+input wire [31:0] wiRegA0;
+output wire  wCRegWrite, wCMemRead, wCMemWrite;
+output wire [1:0] wCRegDst,wCALUOp,wCOrigALU, wCOrigPC,wCMem2Reg;
+output wire [5:0] wOpcode, wFunct;
+input wire [4:0] wRegDispSelect;
+input wire wCInputA0En;
+/*Para debug*/
+output wire [31:0] wDebug;
+
+
+/* Padrao de nomeclatura
+ *
+ * XXXXX - registrador XXXX
+ * wXXXX - wire XXXX
+ * wCXXX - wire do sinal de controle XXX
+ * memXX - memoria XXXX
+ * Xunit - unidade funcional X
+ * iXXXX - sinal de entrada/input
+ * oXXXX - sinal de saida/output
+ */
+ 
+reg [31:0] PC; // registrador do PC
+wire [31:0] wPC4;
+wire [31:0] wiPC;
+wire [31:0] wInstr; 
+wire [4:0] wAddrRs, wAddrRt, wAddrRd, wRegDst, wShamt; // enderecos dos reg rs,rt ,rd e saida do Mux regDst
+wire [31:0] wRead1, wRead2;
+wire [31:0] wOrigALU;
+wire [31:0] wALUresult;
+wire wZero;
+wire [3:0] wALUControl;
+wire [31:0] wReadData;
+wire [31:0] wDataReg;
+wire [15:0] wImm;
+wire [31:0] wExtImm;
+wire [31:0] wBranchPC;
+wire [31:0] wJumpAddr;
+
+wire wOverflow;
+wire [31:0] wExtZeroImm;
+
+/* Inicialização */
+initial
+begin
+	PC <= 32'b0;	
+end
+
+
+assign wPC4	= wPC + 32'h4;  /* Calculo PC+4 */
+assign wBranchPC = wPC4 + {wExtImm[29:0],{2'b00}};  /* Endereco do Branch */
+assign wJumpAddr = {wPC4[31:28],wInstr[25:0],{2'b00}}; /* Endereco do Jump */
+assign wPC 		= PC;
+assign wOpcode = wInstr[31:26];
+assign wAddrRs = wInstr[25:21];
+assign wAddrRt = wInstr[20:16];
+assign wAddrRd = wInstr[15:11];
+assign wShamt  = wInstr[10:6];
+assign wFunct  = wInstr[5:0];
+assign wImm = wInstr[15:0];
+assign wExtZeroImm = {{16'b0},wImm};
+assign wExtImm = {{16{wImm[15]}},wImm};
+assign woInstr = wInstr;
+
+/* Assigns para debug */
+assign wDebug = wiRegA0;
+
+
+
+/* Memória de Instruções */
+CodeMemory memInstr(
+	.iCLK(iCLK),
+	.iCLKMem(iCLKMem),
+	.iAddress(wPC),
+	.iWriteData(ZERO),
+	.iMemRead(ON),
+	.iMemWrite(OFF),
+	.oMemData(wInstr)
+);
+
+
+/* Banco de Registradores */
+Registers memReg(
+	.iCLK(iCLK),
+	.iCLR(iRST),
+	.iReadRegister1(wAddrRs),
+	.iReadRegister2(wAddrRt),
+	.iWriteRegister(wRegDst),
+	.iWriteData(wDataReg), 
+	.iRegWrite(wCRegWrite),
+	.oReadData1(wRead1),
+	.oReadData2(wRead2),
+	.iRegDispSelect(wRegDispSelect),
+	.oRegDisp(wRegDisp),
+	.iRegA0(wiRegA0),
+	.iA0en(wCInputA0En)
+ );
+  
+
+/* ALU CTRL */
+ALUControl ALUControlunit (
+	.iFunct(wFunct), 
+	.iOpcode(wOpcode), 
+	.iALUOp(wCALUOp), 
+	.oControlSignal(wALUControl)
+);
+
+/* ALU */
+ALU ALUunit(
+	.Op(wALUControl),
+	.A(wRead1), 
+	.B(wOrigALU),
+	.Out(wALUresult),
+	.Zero(wZero),
+	.Overflow(wOverflow),
+	.Shamt(wShamt)
+);
+	
+/* memoria de dados */
+DataMemory memData(
+	.iCLK(iCLK),
+	.iCLKMem(iCLKMem), 
+	.iAddress(wALUresult), 
+	.iWriteData(wRead2),
+	.iMemRead(wCMemRead), 
+	.iMemWrite(wCMemWrite),
+	.oMemData(wReadData)
+);
+
+
+	
+
+
+Control Controlunit (
+	.iCLK(iCLK),
+	.iOp(wOpcode),
+	.iFunct(wFunct),
+	.oRegDst(wCRegDst),
+	.oOrigALU(wCOrigALU),
+	.oMemparaReg(wCMem2Reg),
+	.oEscreveReg(wCRegWrite),
+	.oLeMem(wCMemRead),
+	.oEscreveMem(wCMemWrite),
+	.oOpALU(wCALUOp),
+	.oOrigPC(wCOrigPC)
+);
+
+
+always @(wCRegDst)
+begin
+	case(wCRegDst)
+		2'b00:
+			wRegDst <= wAddrRt;
+		2'b01:
+			wRegDst <= wAddrRd;
+		2'b10:
+			wRegDst <= 5'd31;
+		2'b11:
+			wRegDst <= wAddrRd;
+	endcase
+end
+
+
+always @(wCOrigALU)
+begin
+	case(wCOrigALU)
+		2'b00:
+			wOrigALU <= wRead2;
+		2'b01:
+			wOrigALU <= wExtImm;
+		2'b10:
+			wOrigALU <= wExtZeroImm;
+		2'b11:
+			wOrigALU <= wRead2;
+	endcase
+end
+
+always @(wCOrigPC)
+begin
+	case(wCOrigPC)
+		2'b00:
+			wiPC <= wPC4;
+		2'b01:
+			wiPC <= wZero ? wBranchPC: wPC4;
+		2'b10:
+			wiPC <= wJumpAddr;
+		2'b11:
+			wiPC <= wRead1;
+	endcase
+end
+
+always @(wCMem2Reg)
+begin
+	case(wCMem2Reg)
+		2'b00:
+			wDataReg <= wALUresult;
+		2'b01:
+			wDataReg <= wReadData;
+		2'b10:
+			wDataReg <= wPC4;
+		2'b11:
+			wDataReg <= {wImm, 16'b0};
+	endcase
+end
+
+
+
+always @(posedge iCLK)
+begin
+	if(iRST)
+		PC <= 32'b0;
+	else
+		PC <= wiPC;
+
+end
+
+
+endmodule

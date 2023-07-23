@@ -1,0 +1,205 @@
+/*
+ * Controle
+ *
+ */
+ 
+ module Control(
+	iCLK,
+	iOp,
+	iFunct,
+	oRegDst,
+	oOrigALU,
+	oMemparaReg,
+	oEscreveReg,
+	oLeMem,
+	oEscreveMem,
+	oOpALU,
+	oOrigPC
+);
+
+/* I/O type definition */
+input wire iCLK;
+input wire [5:0] iOp, iFunct;
+output wire  oEscreveReg, oLeMem, oEscreveMem;
+output wire [1:0] oRegDst,oOpALU, oOrigALU, oOrigPC, oMemparaReg;
+
+initial
+begin
+		oRegDst <= 2'b00;
+		oOrigALU <= 2'b00;
+		oMemparaReg <= 2'b00;
+		oEscreveReg <= 1'b0;
+		oLeMem <= 1'b0;
+		oEscreveMem <= 1'b0;
+		oOrigPC <= 2'b00;		 
+		oOpALU <= 2'b00;
+end
+
+always @(iOp)
+begin
+	case(iOp)
+		OPCLW:
+			begin
+				oRegDst <= 2'b00;
+				oOrigALU <= 2'b01;
+				oMemparaReg <= 2'b01;
+				oEscreveReg <= 1'b1;
+				oLeMem <= 1'b1;
+				oEscreveMem <= 1'b0;
+				oOrigPC <= 2'b00;
+				oOpALU <= 2'b00;	 
+			end
+			
+		OPCSW:
+			begin
+				oRegDst <= 2'b00;
+				oOrigALU <= 1'b01;
+				oMemparaReg <= 2'b00;
+				oEscreveReg <= 1'b0;
+				oLeMem <= 1'b0;
+				oEscreveMem <= 1'b1;
+				oOrigPC <= 2'b00;				 
+				oOpALU <= 2'b00;
+			end
+			
+		OPCBEQ:
+			begin
+				oRegDst <= 2'b00;
+				oOrigALU <= 2'b00;
+				oMemparaReg <= 2'b00;
+				oEscreveReg <= 1'b0;
+				oLeMem <= 1'b0;
+				oEscreveMem <= 1'b0;
+				oOrigPC <= 2'b01;
+				oOpALU <= 2'b01;				 
+			end
+			
+		OPCRFMT:
+			begin
+				case (iFunct)
+				FUNJR:
+					begin
+						oRegDst <= 2'b01;
+						oOrigALU <= 2'b00;
+						oMemparaReg <= 2'b10;
+						oEscreveReg <= 1'b0;
+						oLeMem <= 1'b0;
+						oEscreveMem <= 1'b0;
+						oOrigPC <= 2'b11;						 
+						oOpALU <= 2'b10; 
+					end
+				
+				default:
+					begin
+						oRegDst <= 2'b01;
+						oOrigALU <= 2'b00;
+						oMemparaReg <= 2'b00;
+						oEscreveReg <= 1'b1;
+						oLeMem <= 1'b0;
+						oEscreveMem <= 1'b0;
+						oOrigPC <= 2'b00;						 
+						oOpALU <= 2'b10;
+					end
+				endcase
+			end
+
+		OPCJMP:
+			begin
+				oRegDst <= 2'b01;
+				oOrigALU <= 2'b00;
+				oMemparaReg <= 2'b00;
+				oEscreveReg <= 1'b0;
+				oLeMem <= 1'b0;
+				oEscreveMem <= 1'b0;
+				oOrigPC <= 2'b10;				 
+				oOpALU <= 2'b00;
+			end
+
+		OPCADDI:
+			begin
+				oRegDst <= 2'b00;
+				oOrigALU <= 2'b01;
+				oMemparaReg <= 2'b00;
+				oEscreveReg <= 1'b1;
+				oLeMem <= 1'b0;
+				oEscreveMem <= 1'b0;
+				oOrigPC <= 2'b00;				 
+				oOpALU <= 2'b11;		 
+			end
+			
+		OPCANDI:
+			begin
+				oRegDst <= 2'b00;
+				oOrigALU <= 2'b10;
+				oMemparaReg <= 2'b00;
+				oEscreveReg <= 1'b1;
+				oLeMem <= 1'b0;
+				oEscreveMem <= 1'b0;
+				oOrigPC <= 2'b00;				 
+				oOpALU <= 2'b11;	 
+			end			
+			
+		OPCXORI:
+			begin
+				oRegDst <= 2'b00;
+				oOrigALU <= 2'b10;
+				oMemparaReg <= 2'b00;
+				oEscreveReg <= 1'b1;
+				oLeMem <= 1'b0;
+				oEscreveMem <= 1'b0;
+				oOrigPC <= 2'b00;				 
+				oOpALU <= 2'b11;	 
+			end
+			
+		OPCORI:
+			begin
+				oRegDst <= 2'b00;
+				oOrigALU <= 2'b10;
+				oMemparaReg <= 2'b00;
+				oEscreveReg <= 1'b1;
+				oLeMem <= 1'b0;
+				oEscreveMem <= 1'b0;
+				oOrigPC <= 2'b00;				 
+				oOpALU <= 2'b11;		 
+			end					
+			
+		OPCJAL:
+			begin
+				oRegDst <= 2'b10;
+				oOrigALU <= 2'b00;
+				oMemparaReg <= 2'b10;
+				oEscreveReg <= 1'b1;
+				oLeMem <= 1'b0;
+				oEscreveMem <= 1'b0;
+				oOrigPC <= 2'b10;				 
+				oOpALU <= 2'b00;	 
+			end
+			
+		OPCLUI:
+			begin
+				oRegDst <= 2'b00;
+				oOrigALU <= 2'b00;
+				oMemparaReg <= 2'b11;
+				oEscreveReg <= 1'b1;
+				oLeMem <= 1'b0;
+				oEscreveMem <= 1'b0;
+				oOrigPC <= 2'b00;				 
+				oOpALU <= 2'b00;	 
+			end	
+			
+		default: // Instrucao Nao reconhecida
+			begin
+				oRegDst <= 2'b00;
+				oOrigALU <= 2'b00;
+				oMemparaReg <= 2'b00;
+				oEscreveReg <= 1'b0;
+				oLeMem <= 1'b0;
+				oEscreveMem <= 1'b0;
+				oOrigPC <= 2'b00;				 
+				oOpALU <= 2'b00;
+			end
+			
+	endcase
+end
+
+endmodule

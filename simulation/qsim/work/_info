@@ -1,0 +1,226 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/Edmundo/Desktop/processador/simulation/qsim
+vcontrol
+Z1 !s110 1561320822
+!i10b 1
+!s100 =YkZH9UgN3kHDOaLXb>7C1
+Ih5DCT_i^W5G@8KlmVecG80
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1561320820
+Z3 8LAB3.vo
+Z4 FLAB3.vo
+Z5 L0 31
+Z6 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z7 !s108 1561320822.000000
+Z8 !s107 LAB3.vo|
+Z9 !s90 -work|work|LAB3.vo|
+!i113 1
+Z10 o-work work
+Z11 tCvgOpt 0
+vcontrol_vlg_vec_tst
+R1
+!i10b 1
+!s100 6UnYij]fFn6^bT;IBXV3;0
+II3NJH5hFF`LCLO?NU70?l3
+R2
+R0
+w1561320817
+8controlTest.vwf.vt
+FcontrolTest.vwf.vt
+Z12 L0 29
+R6
+r1
+!s85 0
+31
+R7
+!s107 controlTest.vwf.vt|
+!s90 -work|work|controlTest.vwf.vt|
+!i113 1
+R10
+R11
+vregisters
+!s110 1561323989
+!i10b 1
+!s100 zzCY59CZz_B7kX:Q5_U6F2
+I;GHhJ;;2Qk8ZE5M?7P9W^0
+R2
+R0
+w1561323987
+R3
+R4
+R5
+R6
+r1
+!s85 0
+31
+Z13 !s108 1561323989.000000
+R8
+R9
+!i113 1
+R10
+R11
+vregisters_vlg_vec_tst
+!s110 1561323990
+!i10b 1
+!s100 A>45F7lz:oHX?eWTWFOd00
+IXKEGiW;G`?QlI1MEeSRad2
+R2
+R0
+w1561323982
+8registersTest.vwf.vt
+FregistersTest.vwf.vt
+R12
+R6
+r1
+!s85 0
+31
+R13
+!s107 registersTest.vwf.vt|
+!s90 -work|work|registersTest.vwf.vt|
+!i113 1
+R10
+R11
+vsignalExtensor
+Z14 !s110 1561318604
+!i10b 1
+!s100 4A604YMOQSmaZUcL<Q2Jb3
+I@fZX[8aPb][fd=aU1z07`2
+R2
+R0
+w1561318603
+R3
+R4
+R5
+R6
+r1
+!s85 0
+31
+Z15 !s108 1561318604.000000
+R8
+R9
+!i113 1
+R10
+R11
+nsignal@extensor
+vsignalExtensor_vlg_vec_tst
+R14
+!i10b 1
+!s100 0W4CS0e8z[`dc:^3[iZ]41
+I;Si0Z?cKE0ZPJ`T`m90Wh1
+R2
+R0
+w1561318599
+8signalExtensorTest.vwf.vt
+FsignalExtensorTest.vwf.vt
+R12
+R6
+r1
+!s85 0
+31
+R15
+!s107 signalExtensorTest.vwf.vt|
+!s90 -work|work|signalExtensorTest.vwf.vt|
+!i113 1
+R10
+R11
+nsignal@extensor_vlg_vec_tst
+vULA
+!s110 1561321350
+!i10b 1
+!s100 k8Sm@oVYP38J<dfmDEHlS0
+IN:`J3e`4V3`PmPDkOD3Q[2
+R2
+R0
+w1561321349
+R3
+R4
+R5
+R6
+r1
+!s85 0
+31
+Z16 !s108 1561321350.000000
+R8
+R9
+!i113 1
+R10
+R11
+n@u@l@a
+vULA_vlg_vec_tst
+!s110 1561321351
+!i10b 1
+!s100 zd]eS2Kd9B9?;In4Xe>]R2
+Iz8oL;Uzn2VhJ2K;iOV>?D1
+R2
+R0
+w1561321345
+8ULATest.vwf.vt
+FULATest.vwf.vt
+R12
+R6
+r1
+!s85 0
+31
+R16
+!s107 ULATest.vwf.vt|
+!s90 -work|work|ULATest.vwf.vt|
+!i113 1
+R10
+R11
+n@u@l@a_vlg_vec_tst
+vULAControl
+Z17 !s110 1561322081
+!i10b 1
+!s100 ZDWe8hWKShzHdJl?_Vo_h2
+Ioc:CGOKW<7EUhdEie_m<^3
+R2
+R0
+w1561322080
+R3
+R4
+R5
+R6
+r1
+!s85 0
+31
+Z18 !s108 1561322081.000000
+R8
+R9
+!i113 1
+R10
+R11
+n@u@l@a@control
+vULAControl_vlg_vec_tst
+R17
+!i10b 1
+!s100 @Yg3<WXG;iEL?eGz@ag5F2
+IfZb6_lzh_0LO2WOXha2gR3
+R2
+R0
+w1561322076
+8ULAControlTest.vwf.vt
+FULAControlTest.vwf.vt
+R12
+R6
+r1
+!s85 0
+31
+R18
+!s107 ULAControlTest.vwf.vt|
+!s90 -work|work|ULAControlTest.vwf.vt|
+!i113 1
+R10
+R11
+n@u@l@a@control_vlg_vec_tst

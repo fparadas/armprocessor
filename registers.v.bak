@@ -1,0 +1,62 @@
+module Registers (
+	iCLK,
+	iRST,
+	iReadRegister1,
+	iReadRegister2,
+	iWriteRegister,
+	iWriteData,
+	iRegWrite,
+	iDispReg,
+	oDataDispReg,
+	oReadData1,
+	oReadData2
+	);
+/* I/O type definition */
+input wire [4:0] iReadRegister1, iReadRegister2, iWriteRegister,iDispReg;
+input wire [63:0] iWriteData;
+input wire iCLK, iRST, iRegWrite;
+output wire [63:0] oReadData1, oReadData2,oDataDispReg;
+
+/* Local register bank */
+reg [31:0] registers[31:0];
+
+integer i;
+
+initial
+begin
+	for (i = 0; i <= 31; i = i + 1)
+	begin
+		registers[i] = 64'b0;
+	end
+	registers[5'd29] = 64'd65400;  // $sp = Maximo - 33
+end
+
+/* Output definition */
+assign oReadData1 =	registers[iReadRegister1];
+assign oReadData2 =	registers[iReadRegister2];
+assign oDataDispReg registers[iDispReg];
+
+/* Main block for writing and reseting */
+always @(posedge iCLK)
+begin
+	if (iRST)
+		begin
+			for (i = 1; i <= 31; i = i + 1)
+				begin
+					registers[i] = 64'b0;
+				end
+			registers[5'd29] = 64'd65400;
+		end
+	
+	else if (iCLK && iRegWrite)
+		begin
+			if (iWriteRegister != 5'b0)
+				begin
+					registers[iWriteRegister] =	iWriteData;
+				end
+		end
+
+end
+
+endmodule
+
